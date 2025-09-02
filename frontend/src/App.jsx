@@ -14,6 +14,7 @@ import PageLoader from './components/PageLoader.jsx'
 import useAuthUser from './hooks/useAuthUser.js'
 import Layout from './components/Layout.jsx'
 import { useThemeStore } from './store/useThemeStore.js'
+import FriendsPage from './Pages/FriendsPage.jsx'
 
 const App = () => {
   //  tank stack query
@@ -81,7 +82,22 @@ const App = () => {
         ) : (
           <Navigate to="/login" />
         )} />
+
+        <Route
+          path="/friends"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={true}>
+                <FriendsPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
+        />
       </Routes>
+
+
 
       <Toaster />
     </div>
